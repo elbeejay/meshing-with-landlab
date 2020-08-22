@@ -1,5 +1,6 @@
 meshing-with-landlab
 ====================
+.. image:: https://github.com/elbeejay/meshing-with-landlab/workflows/docs/badge.svg
 
 "Meshing" (messing) with `Landlab <https://github.com/landlab/landlab>`_ by linking mesh generators from other models.
 
