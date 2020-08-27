@@ -4,4 +4,10 @@
 Examples
 ========
 
-.. todo:: Adding examples (likely pre-run `.rst` notebooks)
+*dmsh* Examples
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+   dmsh_landlab/dmsh_landlab
