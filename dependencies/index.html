@@ -88,7 +88,16 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../background/index.html">Background</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation of Dependencies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation of Dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numpy">numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matplotlib">matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#landlab">landlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dmsh">dmsh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#anuga">Anuga</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#itkwidgets">itkwidgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvista">PyVista</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../apiref/index.html">API Reference</a></li>
 </ul>
@@ -167,9 +176,85 @@
             
   <div class="section" id="installation-of-dependencies">
 <span id="dependencies"></span><h1>Installation of Dependencies<a class="headerlink" href="#installation-of-dependencies" title="Permalink to this headline">¶</a></h1>
-<div class="admonition-todo admonition" id="index-0">
-<p class="admonition-title">Todo</p>
-<p>Go over dependencies and how they can be installed</p>
+<p>To run the examples, there are a handful of Python libraries that must be installed.
+Here we will try to summarize the libraries and how they can be installed.
+Links and references to more detailed installation instructions from the source libraries themselves will be provided as well.</p>
+<div class="section" id="numpy">
+<h2>numpy<a class="headerlink" href="#numpy" title="Permalink to this headline">¶</a></h2>
+<p>This is a pretty standard computational library, it can be <cite>pip</cite> installed if needed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span>
+</pre></div>
+</div>
+<p>For additional information, see the <a class="reference external" href="https://numpy.org/">numpy</a> website.</p>
+</div>
+<div class="section" id="matplotlib">
+<h2>matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">¶</a></h2>
+<p>For basic visualizations, this is also a commonly used library.
+If needed, it can be <cite>pip</cite> installed as well:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+</pre></div>
+</div>
+<p>For additional information, see the <a class="reference external" href="https://matplotlib.org/">matplotlib</a> website.</p>
+</div>
+<div class="section" id="landlab">
+<h2>landlab<a class="headerlink" href="#landlab" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://landlab.readthedocs.io/en/latest/index.html">Landlab</a> is a modular set of tools for landscape evolution modeling.
+<a class="reference external" href="https://landlab.readthedocs.io/en/latest/install/index.html#installation-instructions">Installation instructions</a> are provided for both <cite>conda</cite> and <cite>pip</cite> installation of this package.
+These commands are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">landlab</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">landlab</span>
+</pre></div>
+</div>
+<p>Refer to their <a class="reference external" href="https://landlab.readthedocs.io/en/latest/index.html">documentation</a> for more information about landlab.</p>
+</div>
+<div class="section" id="dmsh">
+<h2>dmsh<a class="headerlink" href="#dmsh" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/nschloe/dmsh">dmsh</a> is a fully Pythonic mesh generator.
+It can be <cite>pip</cite> installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">dmsh</span>
+</pre></div>
+</div>
+<p>For more information, visit the project <a class="reference external" href="https://github.com/nschloe/dmsh">repository</a>.</p>
+</div>
+<div class="section" id="anuga">
+<h2>Anuga<a class="headerlink" href="#anuga" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/GeoscienceAustralia/anuga_core">Anuga</a> is a Python package developed for simulating the shallow water equations.
+Installation of Anuga can be a bit challenging as it interfaces with C under the hood.
+In addition to dependencies created by non-Python programming langauges, Anuga also uses popular geospatial libraries.
+Geospatial libraries are notorious for causing dependency clashes.
+To further complicate matters, Anuga is currently (as of Sept, 2020) still in Python 2.7.
+Fear not, for a Python 3.x branch exists, and that is what the examples shown here will be based on.</p>
+<p>Installation of Anuga is described in the project <a class="reference external" href="https://github.com/GeoscienceAustralia/anuga_core/wiki">wiki</a>.
+We suggest installation via <cite>Miniconda</cite> or <cite>Anaconda</cite> to help manage the dependencies.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After running <cite>git clone</cite> to get a local copy of the Anuga repository prior to installation, you should be sure to <strong>checkout</strong> the <a class="reference external" href="https://github.com/GeoscienceAustralia/anuga_core/tree/anuga_py3">anuga_py3</a> branch to ensure the version of Anuga you install is Python 3.x compatible.</p>
+</div>
+</div>
+<div class="section" id="itkwidgets">
+<h2>itkwidgets<a class="headerlink" href="#itkwidgets" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/InsightSoftwareConsortium/itkwidgets">itkwidgets</a> is a nifty package for creating interactive visualizations within Jupyter Notebooks.
+The package can be both <cite>conda</cite> and <cite>pip</cite> installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">itkwidgets</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">itkwidgets</span>
+</pre></div>
+</div>
+<p>Visit the project <a class="reference external" href="https://github.com/InsightSoftwareConsortium/itkwidgets">repository</a> for more information about this library.</p>
+</div>
+<div class="section" id="pyvista">
+<h2>PyVista<a class="headerlink" href="#pyvista" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/pyvista/pyvista">PyVista</a> brings the power of VTK visualizations to Python.
+It can be <cite>pip</cite> installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyvista</span>
+</pre></div>
+</div>
+<p>For more information about the installation process and the project, visit the <a class="reference external" href="https://docs.pyvista.org/">PyVista documentation</a>.</p>
 </div>
 </div>
 

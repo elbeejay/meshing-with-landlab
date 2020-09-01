@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dmsh to landlab: example 1 &mdash; MeshingLandlab 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="API Reference" href="../../apiref/index.html" />
+    <link rel="prev" title="Examples" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: gray" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> MeshingLandlab
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencies/index.html">Installation of Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#dmsh-examples"><em>dmsh</em> Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dmsh to landlab: example 1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#import-libraries">Import libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-mesh-and-optimize-it">Generate mesh (and optimize it)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualize-the-mesh">Visualize the mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#translate-the-mesh-to-landlab">Translate the mesh to landlab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualize-the-landlab-mesh">Visualize the landlab mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-landlab-grid-elevations">Set landlab grid elevations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualize-the-elevations-of-the-mesh">Visualize the elevations of the mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-grid-elevations-as-function-of-x">Set grid elevations as function of <em>x</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Visualize the elevations of the mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-landlab-flow-accumulator-and-visualize-it">Run landlab flow accumulator and visualize it</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-grid-elevations-as-function-of-both-x-and-y">Set grid elevations as function of both <em>x</em> and <em>y</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Visualize the elevations of the mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Run landlab flow accumulator and visualize it</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#end">End</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../apiref/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MeshingLandlab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples</a> &raquo;</li>
+        
+      <li>dmsh to landlab: example 1</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/examples/dmsh_landlab_01/dmsh_landlab.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="../../apiref/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dmsh-to-landlab-example-1">
+<h1>dmsh to landlab: example 1<a class="headerlink" href="#dmsh-to-landlab-example-1" title="Permalink to this headline">¶</a></h1>
+<p>In this example we use the <a class="reference external" href="https://github.com/nschloe/dmsh">dmsh</a>
+package to create a mesh that is then passed in to initialize a
+<a class="reference external" href="https://github.com/landlab/landlab">landlab</a> grid. In this example
+we will do the following:</p>
+<ol class="arabic simple">
+<li><p>Generate a circular mesh with <em>dmsh</em></p></li>
+<li><p>Optionally optimize it with
+<a class="reference external" href="https://github.com/nschloe/optimesh">optimesh</a></p></li>
+<li><p>Translate the mesh to <em>landlab</em></p></li>
+<li><p>Assign elevation values to the <em>landlab</em> mesh</p></li>
+<li><p>Run the <em>landlab</em> flow accumulation routine</p></li>
+</ol>
+<div class="section" id="import-libraries">
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">¶</a></h2>
+<p>This notebook requires the packages <em>dmsh</em>, <em>landlab</em>, <em>numpy</em> and
+<em>matplotlib</em>. These are all packages that can be <strong>pip</strong>-installed.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dmsh</span>
+<span class="kn">from</span> <span class="nn">landlab.plot.imshow</span> <span class="kn">import</span> <span class="n">imshow_grid</span>
+<span class="kn">from</span> <span class="nn">landlab.plot.graph</span> <span class="kn">import</span> <span class="n">plot_graph</span>
+<span class="kn">from</span> <span class="nn">landlab.grid</span> <span class="kn">import</span> <span class="n">VoronoiDelaunayGrid</span>
+<span class="kn">from</span> <span class="nn">landlab.components</span> <span class="kn">import</span> <span class="n">FlowAccumulator</span>
+<span class="kn">from</span> <span class="nn">landlab.components</span> <span class="kn">import</span> <span class="n">FlowDirectorSteepest</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-mesh-and-optimize-it">
+<h2>Generate mesh (and optimize it)<a class="headerlink" href="#generate-mesh-and-optimize-it" title="Permalink to this headline">¶</a></h2>
+<p>We start by constructing a circular mesh in <em>dmsh</em>. The syntax for this
+is <code class="docutils literal notranslate"><span class="pre">geo</span> <span class="pre">=</span> <span class="pre">dmsh.Circle([Center</span> <span class="pre">X-Coord,</span> <span class="pre">Center</span> <span class="pre">Y-Coord],</span> <span class="pre">Diameter)</span></code> and
+then <code class="docutils literal notranslate"><span class="pre">dmsh.generate(geo,</span> <span class="pre">edge_length)</span></code>.</p>
+<p>After defining the mesh with <em>dmsh</em>, we (optionally) optimize it with
+<em>optimesh</em>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo</span> <span class="o">=</span> <span class="n">dmsh</span><span class="o">.</span><span class="n">Circle</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="n">dmsh</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">geo</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">)</span>
+
+<span class="c1"># try to optimize the mesh using optimesh</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">optimesh</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="n">optimesh</span><span class="o">.</span><span class="n">cvt</span><span class="o">.</span><span class="n">quasi_newton_uniform_full</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">cells</span><span class="p">,</span> <span class="mf">1.0e-10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;optimesh not installed, mesh is not optimized.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-the-mesh">
+<h2>Visualize the mesh<a class="headerlink" href="#visualize-the-mesh" title="Permalink to this headline">¶</a></h2>
+<p>We use a built-in <em>dmsh</em> function to take a look at what the mesh we’ve
+defined actually looks like.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmsh</span><span class="o">.</span><span class="n">helpers</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">cells</span><span class="p">,</span> <span class="n">geo</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_6_0.png" src="../../_images/output_6_0.png" />
+</div>
+<div class="section" id="translate-the-mesh-to-landlab">
+<h2>Translate the mesh to landlab<a class="headerlink" href="#translate-the-mesh-to-landlab" title="Permalink to this headline">¶</a></h2>
+<p>Now we define a <em>landlab</em> Voronoi Delaunay unstructured grid using the
+(x,y) coordinates of the points defined in the <em>dmsh</em> grid (stored in
+the variable <code class="docutils literal notranslate"><span class="pre">X</span></code>).</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vmg</span> <span class="o">=</span> <span class="n">VoronoiDelaunayGrid</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-the-landlab-mesh">
+<h2>Visualize the landlab mesh<a class="headerlink" href="#visualize-the-landlab-mesh" title="Permalink to this headline">¶</a></h2>
+<p>To see how this translation went, we can use one of the built-in
+<em>landlab</em> functions to visualize the <em>landlab</em> mesh.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plot_graph</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s2">&quot;link&quot;</span><span class="p">,</span> <span class="n">with_id</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_10_0.png" src="../../_images/output_10_0.png" />
+</div>
+<div class="section" id="set-landlab-grid-elevations">
+<h2>Set landlab grid elevations<a class="headerlink" href="#set-landlab-grid-elevations" title="Permalink to this headline">¶</a></h2>
+<p>Next we will demonstrate now elevation data can be added to this grid.</p>
+<p>First we initialize the grid with 0s as elevation values. Then we define
+all values left of the origin as -1, and those to the right of the
+origin as 1.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_vals</span> <span class="o">=</span> <span class="n">vmg</span><span class="o">.</span><span class="n">add_zeros</span><span class="p">(</span><span class="s2">&quot;topographic__elevation&quot;</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s2">&quot;node&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">vmg</span><span class="o">.</span><span class="n">at_node</span><span class="p">[</span><span class="s1">&#39;topographic__elevation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">vmg</span><span class="o">.</span><span class="n">at_node</span><span class="p">[</span><span class="s1">&#39;topographic__elevation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-the-elevations-of-the-mesh">
+<h2>Visualize the elevations of the mesh<a class="headerlink" href="#visualize-the-elevations-of-the-mesh" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have assigned elevations to the <em>landlab</em> grid, we can
+visualize the elevations with another one of the built-in <em>landlab</em>
+functions. We expect to see a vertical divide at <code class="docutils literal notranslate"><span class="pre">x=0</span></code> separating the
+-1 elevations on the left and +1 elevations on the right.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Landlab Grid Elevations&#39;</span><span class="p">)</span>
+<span class="n">imshow_grid</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">jayh</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">espin</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">landlab</span><span class="o">/</span><span class="n">plot</span><span class="o">/</span><span class="n">imshow</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">267</span><span class="p">:</span> <span class="n">MatplotlibDeprecationWarning</span><span class="p">:</span> <span class="n">You</span> <span class="n">are</span> <span class="n">modifying</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="n">a</span> <span class="n">globally</span> <span class="n">registered</span> <span class="n">colormap</span><span class="o">.</span> <span class="n">In</span> <span class="n">future</span> <span class="n">versions</span><span class="p">,</span> <span class="n">you</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span> <span class="n">modify</span> <span class="n">a</span> <span class="n">registered</span> <span class="n">colormap</span> <span class="ow">in</span><span class="o">-</span><span class="n">place</span><span class="o">.</span> <span class="n">To</span> <span class="n">remove</span> <span class="n">this</span> <span class="n">warning</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">make</span> <span class="n">a</span> <span class="n">copy</span> <span class="n">of</span> <span class="n">the</span> <span class="n">colormap</span> <span class="n">first</span><span class="o">.</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;viridis&quot;</span><span class="p">))</span>
+  <span class="n">cmap</span><span class="o">.</span><span class="n">set_bad</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color_for_closed</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_15_1.png" src="../../_images/output_15_1.png" />
+</div>
+<div class="section" id="set-grid-elevations-as-function-of-x">
+<h2>Set grid elevations as function of <em>x</em><a class="headerlink" href="#set-grid-elevations-as-function-of-x" title="Permalink to this headline">¶</a></h2>
+<p>That last example of elevation assignment was rather trivial. Let’s take
+a look at how we might assign elevations based on a function <code class="docutils literal notranslate"><span class="pre">f(x)</span></code>.
+To do this we will first create a function of the form
+<code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">|x|</span></code> and then we will assign elevation values to the grid
+nodes based on this function.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_elev</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">elev</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">elev</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">vmg</span><span class="o">.</span><span class="n">at_node</span><span class="p">[</span><span class="s1">&#39;topographic__elevation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_elev</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Visualize the elevations of the mesh<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Again we can use the <code class="docutils literal notranslate"><span class="pre">imshow_grid()</span></code> functionality in <em>landlab</em> to
+visualize this mesh.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Landlab Grid Elevations&#39;</span><span class="p">)</span>
+<span class="n">imshow_grid</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_20_0.png" src="../../_images/output_20_0.png" />
+</div>
+<div class="section" id="run-landlab-flow-accumulator-and-visualize-it">
+<h2>Run landlab flow accumulator and visualize it<a class="headerlink" href="#run-landlab-flow-accumulator-and-visualize-it" title="Permalink to this headline">¶</a></h2>
+<p>Now we’ll use the <code class="docutils literal notranslate"><span class="pre">FlowAccumulator</span></code> component of <em>landlab</em> to
+visualize the drainage network on this grid. We expect there to be an
+accumulation of flow at the left and right boundaries where we have low
+topography, and no flow accumulation at <code class="docutils literal notranslate"><span class="pre">x=0</span></code> where we have our high
+elevations.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fa</span> <span class="o">=</span> <span class="n">FlowAccumulator</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span>
+                     <span class="n">flow_director</span><span class="o">=</span><span class="n">FlowDirectorSteepest</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fa</span><span class="o">.</span><span class="n">run_one_step</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imshow_grid</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="s1">&#39;drainage_area&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_24_0.png" src="../../_images/output_24_0.png" />
+</div>
+<div class="section" id="set-grid-elevations-as-function-of-both-x-and-y">
+<h2>Set grid elevations as function of both <em>x</em> and <em>y</em><a class="headerlink" href="#set-grid-elevations-as-function-of-both-x-and-y" title="Permalink to this headline">¶</a></h2>
+<p>Here we create a function <code class="docutils literal notranslate"><span class="pre">f(x,y)</span></code> to describe the elevation as a
+function of both the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> position in space. This example is
+quite similar to the previous one, here we just add a <code class="docutils literal notranslate"><span class="pre">y</span></code> component to
+the function.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_elev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">elev</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">elev</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">vmg</span><span class="o">.</span><span class="n">at_node</span><span class="p">[</span><span class="s1">&#39;topographic__elevation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_elev</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Visualize the elevations of the mesh<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Again we’ll use the built-in <code class="docutils literal notranslate"><span class="pre">imshow_grid()</span></code> function to look at the
+elevations of the mesh.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Landlab Grid Elevations&#39;</span><span class="p">)</span>
+<span class="n">imshow_grid</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_29_0.png" src="../../_images/output_29_0.png" />
+</div>
+<div class="section" id="id3">
+<h2>Run landlab flow accumulator and visualize it<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>Now if we run the <code class="docutils literal notranslate"><span class="pre">FlowAccumulator</span></code> we expect to see an accumulation
+of flow in the upper left, upper right, lower left, and lower right
+sections of the grid.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fa</span> <span class="o">=</span> <span class="n">FlowAccumulator</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span>
+                     <span class="n">flow_director</span><span class="o">=</span><span class="n">FlowDirectorSteepest</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fa</span><span class="o">.</span><span class="n">run_one_step</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imshow_grid</span><span class="p">(</span><span class="n">vmg</span><span class="p">,</span> <span class="s1">&#39;drainage_area&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_33_0.png" src="../../_images/output_33_0.png" />
+</div>
+<div class="section" id="end">
+<h2>End<a class="headerlink" href="#end" title="Permalink to this headline">¶</a></h2>
+<p>Congrats! You’ve successfully generated a mesh in <em>dmsh</em> and imported it
+into <em>landlab</em>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../apiref/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, J. Hariharan
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
