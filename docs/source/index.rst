@@ -6,7 +6,7 @@ Documentation
 -------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    background/index
    dependencies/index

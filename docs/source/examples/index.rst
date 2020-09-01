@@ -14,4 +14,4 @@ Links below take you to rendered version of individual notebooks in which the ou
 .. toctree::
    :maxdepth: 1
 
-   dmsh_landlab/dmsh_landlab
+   dmsh_landlab_01/dmsh_landlab
