@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>anuga to landlab: example 1 &mdash; MeshingLandlab 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="API Reference" href="../../apiref/index.html" />
+    <link rel="prev" title="dmsh to landlab: example 1" href="../dmsh_landlab_01/dmsh_landlab.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: gray" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> MeshingLandlab
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dependencies/index.html">Installation of Dependencies</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#dmsh-examples"><em>dmsh</em> Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#anuga-examples"><em>anuga</em> Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">anuga to landlab: example 1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#import-libraries">Import libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-the-anuga-mesh">Generate the Anuga mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-fake-topography-and-assign-to-the-mesh">Generate fake topography and assign to the mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#translate-to-landlab">Translate to landlab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-flow-accumulator">Running the flow accumulator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../apiref/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MeshingLandlab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples</a> &raquo;</li>
+        
+      <li>anuga to landlab: example 1</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/examples/anuga_landlab_01/anuga_landlab_01.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="../../apiref/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../dmsh_landlab_01/dmsh_landlab.html" class="btn btn-neutral float-left" title="dmsh to landlab: example 1" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="anuga-to-landlab-example-1">
+<h1>anuga to landlab: example 1<a class="headerlink" href="#anuga-to-landlab-example-1" title="Permalink to this headline">¶</a></h1>
+<p>In this example we use
+<a class="reference external" href="https://github.com/GeoscienceAustralia/anuga_core">Anuga</a> to create
+a mesh with variable resolution. With Anuga, we are able to specify
+regions and specific grid cell resolutions within those regions. In this
+example we will demonstrate this by doing the following:</p>
+<ol class="arabic simple">
+<li><p>Creation of an <em>Anuga</em> mesh with 2 regions of different resolutions</p></li>
+<li><p>Create simple sloped elevations that are imposed on that mesh</p></li>
+<li><p>Translate the <em>Anuga</em> mesh to a <em>landlab</em> grid</p></li>
+<li><p>Run the <em>landlab</em> flow accumulation routine</p></li>
+</ol>
+<div class="section" id="import-libraries">
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">¶</a></h2>
+<p>This notebook requires the <em>numpy</em>, <em>matplotlib</em>, <em>landlab</em> and <em>anuga</em>
+packages. See the
+<a class="reference external" href="https://elbeejay.github.io/meshing-with-landlab/dependencies/index.html">documentation</a>
+for links to the source installation guides.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">anuga</span>
+<span class="kn">import</span> <span class="nn">anuga.utilities.idwinterp</span> <span class="k">as</span> <span class="nn">idt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-the-anuga-mesh">
+<h2>Generate the Anuga mesh<a class="headerlink" href="#generate-the-anuga-mesh" title="Permalink to this headline">¶</a></h2>
+<p>To generate the Anuga mesh we first define a bounding polygon that
+defines the outer extents. Then a region within the domain is defined
+<code class="docutils literal notranslate"><span class="pre">c_region</span></code> by listing points in counter-clockwise order that form a
+closed shape. The resolution (cell area) is defined for a low resolution
+and higher resolution region. Then the mesh is visualized so this
+distinction in resolution can be observed.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define domain extents</span>
+<span class="n">bounding_polygon</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a region of the domain to model in higher-res</span>
+<span class="n">c_region</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define boundaries</span>
+<span class="n">boundary_tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bottom&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;right&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+                <span class="s1">&#39;top&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+                <span class="s1">&#39;left&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]}</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define low and high res values</span>
+<span class="n">low_res</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">high_res</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the domain</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">anuga</span><span class="o">.</span><span class="n">create_domain_from_regions</span><span class="p">(</span><span class="n">bounding_polygon</span><span class="p">,</span>
+                                          <span class="n">boundary_tags</span><span class="p">,</span>
+                                          <span class="n">maximum_triangle_area</span><span class="o">=</span><span class="n">low_res</span><span class="p">,</span>
+                                          <span class="n">interior_regions</span><span class="o">=</span><span class="p">[[</span><span class="n">c_region</span><span class="p">,</span> <span class="n">high_res</span><span class="p">]],</span>
+                                          <span class="n">mesh_filename</span><span class="o">=</span><span class="s1">&#39;test.msh&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize mesh</span>
+<span class="n">dplotter</span> <span class="o">=</span> <span class="n">anuga</span><span class="o">.</span><span class="n">Domain_plotter</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">dplotter</span><span class="o">.</span><span class="n">triang</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Figure</span> <span class="n">files</span> <span class="k">for</span> <span class="n">each</span> <span class="n">frame</span> <span class="n">will</span> <span class="n">be</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">_plot</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_9_1.png" src="../../_images/output_9_1.png" />
+</div>
+<div class="section" id="generate-fake-topography-and-assign-to-the-mesh">
+<h2>Generate fake topography and assign to the mesh<a class="headerlink" href="#generate-fake-topography-and-assign-to-the-mesh" title="Permalink to this headline">¶</a></h2>
+<p>Here we generate a simple sloped topography. This is defined using
+<em>numpy</em>, so it is on a regular grid. Built-in interpolation
+functionality from <em>anuga</em> is applied to interpolate from the regular
+grid to the <em>anuga</em> mesh. Lastly the elevation values are assigned to
+the mesh.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create fake topography as a grid</span>
+<span class="n">topo_gridded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">topo_gridded</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">topo_gridded</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">grid_y</span><span class="p">,</span> <span class="n">grid_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">topo_gridded</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_11_0.png" src="../../_images/output_11_0.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># flatten</span>
+<span class="n">xval</span> <span class="o">=</span> <span class="n">grid_x</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">yval</span> <span class="o">=</span> <span class="n">grid_y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">topoval</span> <span class="o">=</span> <span class="n">topo_gridded</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># interpolate gridded values to irregular grid</span>
+<span class="n">idwtree</span> <span class="o">=</span> <span class="n">idt</span><span class="o">.</span><span class="n">invdisttree</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">xval</span><span class="p">,</span> <span class="n">yval</span><span class="p">)),</span> <span class="n">topoval</span><span class="p">)</span>
+<span class="n">topo</span> <span class="o">=</span> <span class="n">idwtree</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">centroid_coordinates</span><span class="p">,</span> <span class="n">nnear</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set values</span>
+<span class="n">domain</span><span class="o">.</span><span class="n">set_quantity</span><span class="p">(</span><span class="s1">&#39;elevation&#39;</span><span class="p">,</span> <span class="n">topo</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;centroids&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="translate-to-landlab">
+<h2>Translate to landlab<a class="headerlink" href="#translate-to-landlab" title="Permalink to this headline">¶</a></h2>
+<p>To translate the mesh as well as the elevation values from <em>anuga</em> to
+<em>landlab</em>, first we need to identify the vertex coordinates and their
+corresponding elevation values. After that the
+<code class="docutils literal notranslate"><span class="pre">landlab.VoronoiDelaunayGrid</span></code> object is established using the
+coordinate values. This grid is plotted to ensure that the variable
+resolution is preserved. Then the elevation attribute is initialized for
+each node, and the translation of <em>anuga</em> elevation values to the
+<em>landlab</em> grid takes place. The resulting <em>landlab</em> grid with elevations
+is plotted next to the source elevation data to visually check them.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get vertex coordinates and their elevation values</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">get_quantity</span><span class="p">(</span><span class="s1">&#39;elevation&#39;</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_vertex_values</span><span class="p">()</span>
+<span class="n">XY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">landlab.grid</span> <span class="kn">import</span> <span class="n">VoronoiDelaunayGrid</span>
+<span class="kn">from</span> <span class="nn">landlab.plot.graph</span> <span class="kn">import</span> <span class="n">plot_graph</span>
+<span class="n">worked</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">worked</span> <span class="o">&lt;=</span> <span class="mi">25</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">VoronoiDelaunayGrid</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+        <span class="n">worked</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">worked</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">worked</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">100</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Landlab&#39;s plot_graph(grid, at=&#39;link&#39;, with_id=False)&quot;</span><span class="p">)</span>
+<span class="n">plot_graph</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s2">&quot;link&quot;</span><span class="p">,</span> <span class="n">with_id</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_18_0.png" src="../../_images/output_18_0.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_vals</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">add_zeros</span><span class="p">(</span><span class="s2">&quot;topographic__elevation&quot;</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s2">&quot;node&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># translating elevation from anuga grid to landlab grid</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">node_x</span><span class="p">)):</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">XY</span><span class="o">==</span><span class="p">[</span><span class="n">grid</span><span class="o">.</span><span class="n">node_x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">grid</span><span class="o">.</span><span class="n">node_y</span><span class="p">[</span><span class="n">i</span><span class="p">]])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">at_node</span><span class="p">[</span><span class="s1">&#39;topographic__elevation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="kn">from</span> <span class="nn">landlab.plot.imshow</span> <span class="kn">import</span> <span class="n">imshow_grid</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Landlab Grid&#39;</span><span class="p">)</span>
+<span class="n">imshow_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Source Topo Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">topo_gridded</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-flow-accumulator">
+<h2>Running the flow accumulator<a class="headerlink" href="#running-the-flow-accumulator" title="Permalink to this headline">¶</a></h2>
+<p>Lastly the <code class="docutils literal notranslate"><span class="pre">landlab.FlowAccumulator</span></code> module is initialized and run.
+Using this on the variable resolution grid shows the impact grid
+resolution can have on model results (even on a simple sloped
+topography). The final cell plots the source elevation data on the left,
+the generated landlab grid with elevations in the center, and the
+resulting flow accumulation map on the right.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">landlab.components</span> <span class="kn">import</span> <span class="n">FlowAccumulator</span>
+<span class="kn">from</span> <span class="nn">landlab.components</span> <span class="kn">import</span> <span class="n">FlowDirectorSteepest</span>
+<span class="n">fa</span> <span class="o">=</span> <span class="n">FlowAccumulator</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span>
+                     <span class="n">flow_director</span><span class="o">=</span><span class="n">FlowDirectorSteepest</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fa</span><span class="o">.</span><span class="n">run_one_step</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imshow_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="s1">&#39;drainage_area&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_25_0.png" src="../../_images/output_25_0.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">landlab.plot.imshow</span> <span class="kn">import</span> <span class="n">imshow_grid</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Source Topo Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">topo_gridded</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Landlab Grid&#39;</span><span class="p">)</span>
+<span class="n">imshow_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="s1">&#39;topographic__elevation&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Landlab Flow Accumulation&#39;</span><span class="p">)</span>
+<span class="n">imshow_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="s1">&#39;drainage_area&#39;</span><span class="p">,</span> <span class="n">show_elements</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/output_26_0.png" src="../../_images/output_26_0.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../apiref/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../dmsh_landlab_01/dmsh_landlab.html" class="btn btn-neutral float-left" title="dmsh to landlab: example 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, J. Hariharan
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
