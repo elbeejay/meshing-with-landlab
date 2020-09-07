@@ -202,7 +202,6 @@ is plotted next to the source elevation data to visually check them.
 
 .. code:: ipython3
 
-    %%capture
     from landlab.plot.imshow import imshow_grid
     plt.figure(figsize=(10,5))
     plt.subplot(1,2,1)
@@ -214,6 +213,17 @@ is plotted next to the source elevation data to visually check them.
     plt.gca().invert_yaxis()
     plt.colorbar()
     plt.show()
+
+
+.. parsed-literal::
+
+    /home/jayh/miniconda3/envs/espin/lib/python3.8/site-packages/landlab/plot/imshow.py:267: MatplotlibDeprecationWarning: You are modifying the state of a globally registered colormap. In future versions, you will not be able to modify a registered colormap in-place. To remove this warning, you can make a copy of the colormap first. cmap = copy.copy(mpl.cm.get_cmap("viridis"))
+      cmap.set_bad(color=color_for_closed)
+
+
+
+.. image:: output_21_1.png
+
 
 Running the flow accumulator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
