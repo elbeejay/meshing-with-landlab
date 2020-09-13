@@ -1,4 +1,4 @@
-anuga to landlab: example 1
+anuga to landlab: example 2
 ===========================
 
 In this example we use
@@ -8,9 +8,12 @@ regions and specific grid cell resolutions within those regions. In this
 example we will demonstrate this by doing the following:
 
 1. Creation of an *Anuga* mesh with 2 regions of different resolutions
-2. Create simple sloped elevations that are imposed on that mesh
+2. Create simple ridge that is in the center of the domain and each
+   slope has a different cell resolution
 3. Translate the *Anuga* mesh to a *landlab* grid
 4. Run the *landlab* flow accumulation routine
+5. Fill in elevation holes that were created in the mesh generation
+6. Re-run the flow accumulation routine
 
 Import libraries
 ~~~~~~~~~~~~~~~~
@@ -61,7 +64,7 @@ distinction in resolution can be observed.
 .. code:: ipython3
 
     # define low and high res values
-    low_res = 5
+    low_res = 50
     high_res = 1
 
 .. code:: ipython3
@@ -106,8 +109,12 @@ the mesh.
     # create fake topography as a grid
     topo_gridded = np.zeros((100, 100))
     [a, b] = np.shape(topo_gridded)
-    for i in range(0, a):
-        topo_gridded[:, i] = np.linspace(0, 100, num=100)
+    for i in range(0, b):
+        if i < b/2:
+            topo_gridded[i, :] = i
+        else:
+            topo_gridded[i, :] = np.abs(i - 100)
+            
     grid_y, grid_x = np.mgrid[0:100, 0:100]
     
     plt.figure()
@@ -228,12 +235,12 @@ is plotted next to the source elevation data to visually check them.
 Running the flow accumulator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Lastly the ``landlab.FlowAccumulator`` module is initialized and run.
-Using this on the variable resolution grid shows the impact grid
-resolution can have on model results (even on a simple sloped
-topography). The final cell plots the source elevation data on the left,
-the generated landlab grid with elevations in the center, and the
-resulting flow accumulation map on the right.
+Now the ``landlab.FlowAccumulator`` module is initialized and run. Using
+this on the variable resolution grid shows the impact grid resolution
+can have on model results (even on a simple sloped topography). The
+final cell plots the source elevation data on the left, the generated
+landlab grid with elevations in the center, and the resulting flow
+accumulation map on the right.
 
 .. code:: ipython3
 
@@ -275,4 +282,66 @@ resulting flow accumulation map on the right.
 
 
 .. image:: output_26_0.png
+
+
+Hole filling
+~~~~~~~~~~~~
+
+If we look closely at the center panel in the figure above, we might
+notice that some cells near the ridge have low elevation values. This is
+likely due to the conversion process between the mesh types, leaving
+some unintended ‘holes’ in the topography. While this is not ideal, it
+is not too different from the ‘holes’ that are commonly found in DEMs.
+As such, there are built-in *landlab* components for dealing with
+‘holes’. We will first visualize the domain to see the holes, then apply
+the ``landlab.LakeMapperBarnes`` component to fill in the holes, and
+take a look at the resulting grid.
+
+.. code:: ipython3
+
+    imshow_grid(grid, "topographic__elevation", show_elements=False, cmap='viridis')
+    plt.show()
+
+
+
+.. image:: output_28_0.png
+
+
+.. code:: ipython3
+
+    from landlab.components import LakeMapperBarnes
+    z_init = z_vals.copy()
+    lmb = LakeMapperBarnes(grid, method='Steepest', surface=z_init, fill_flat=True,
+                           redirect_flow_steepest_descent=False, track_lakes=False, ignore_overfill=True)
+    lmb.run_one_step()
+
+.. code:: ipython3
+
+    imshow_grid(grid, "topographic__elevation", show_elements=False, cmap='viridis')
+    plt.show()
+
+
+
+.. image:: output_30_0.png
+
+
+Re-running the FlowAccumulator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is worth noting that the holes predominantly appeared in the ‘coarse’
+region of the mesh, and therefore could be due to large irregular cells
+whose values were interpolated from a finer regular grid. Anyway, now
+that the holes are filled, we can re-run the ``landlab.FlowAccumulator``
+component and take a look at how grid resolution impacts our results.
+
+.. code:: ipython3
+
+    fa = FlowAccumulator(grid, 'topographic__elevation',
+                         flow_director=FlowDirectorSteepest)
+    fa.run_one_step()
+    imshow_grid(grid, 'drainage_area', show_elements=False, cmap='viridis')
+
+
+
+.. image:: output_32_0.png
 
